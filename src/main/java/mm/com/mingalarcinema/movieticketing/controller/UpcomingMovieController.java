@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("upcoming")
 public class UpcomingMovieController {
+
 }
