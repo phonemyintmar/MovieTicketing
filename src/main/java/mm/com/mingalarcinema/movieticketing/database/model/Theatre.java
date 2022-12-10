@@ -6,25 +6,18 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "ob_movie")
+@Table(name = "ob_theatre")
 @Setter
 @Getter
-public class Movie {
-
+public class Theatre {
     @Id
-    private Long movieId;
+    private String theatreId;
 
-    private String movieName;
-
-    private String bannerUrl;
+    private String address;
 
     private String description;
 
-    private String movieType;
-
-    private LocalDateTime updatedDate;
+    private String bannerUrl;
 }
