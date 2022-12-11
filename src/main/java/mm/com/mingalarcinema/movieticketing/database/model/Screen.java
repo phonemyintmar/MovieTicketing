@@ -1,5 +1,6 @@
 package mm.com.mingalarcinema.movieticketing.database.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,17 +17,22 @@ public class Screen {
     @Id
     private String screenId;
 
-    private String movieId;
-
     private String theatreId;
 
-    private LocalDateTime startDate;
+    private String coupleSeats;
 
-    private LocalDateTime endDate;
+    private String normalSeats;
 
-    private String screenHour;
+    private String standardSeats;
+
+    private String premiumSeats;
 
     private String bannerUrl;
 
-//    private Double prices;
+    private Boolean is3d;
+
+    private String theatreAddress;
+
+    @JsonIgnore
+    private Integer totalSeatNumbers;
 }

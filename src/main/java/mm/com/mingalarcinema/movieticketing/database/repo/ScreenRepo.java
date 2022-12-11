@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ScreenRepo extends JpaRepository<Screen, String> {
 
-    List<Screen> getScreensByMovieId(String movieId);
 }

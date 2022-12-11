@@ -3,9 +3,7 @@ package mm.com.mingalarcinema.movieticketing.database.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,15 +14,24 @@ import java.util.List;
 public class Movie {
 
     @Id
-    private Long movieId;
+    private String movieId;
 
     private String movieName;
 
+    private String cast;
+
+    private String genre;
+
     private String bannerUrl;
+
+    private String trailerUrl;
 
     private String description;
 
-    private String movieType;
+    @Enumerated(EnumType.STRING)
+    private MovieType movieType;
+
+    private int moviePriority;
 
     private LocalDateTime updatedDate;
 }

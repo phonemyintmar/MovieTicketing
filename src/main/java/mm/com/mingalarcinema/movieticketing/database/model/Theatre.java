@@ -15,9 +15,13 @@ public class Theatre {
     @Id
     private String theatreId;
 
+    private String theatreName;
+
     private String address;
 
     private String description;
+
+    private int theatrePopularity;
 
     private String bannerUrl;
 }

@@ -3,12 +3,9 @@ package mm.com.mingalarcinema.movieticketing.controller;
 import mm.com.mingalarcinema.movieticketing.database.model.Movie;
 import mm.com.mingalarcinema.movieticketing.database.repo.MovieRepo;
 import mm.com.mingalarcinema.movieticketing.database.repo.TheatreRepo;
-import mm.com.mingalarcinema.movieticketing.service.MovieService;
+import mm.com.mingalarcinema.movieticketing.service.implementations.MovieService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -32,9 +29,12 @@ public class MovieController {
 
     @GetMapping("")
     public ResponseEntity<?> getMovies() {
-        List<Movie> movieList = movieRepo.findAll();
-        if (movieList.isEmpty()) return ResponseEntity.badRequest().body("ma shi wo ");
-        return ResponseEntity.ok(movieList);
+        return movieService.getNowShowingMovies();
+    }
+
+    @GetMapping("/{movieId}")
+    public ResponseEntity<?> getMovieDetail(@PathVariable String movieId) {
+        return movieService.getMovieDetail(movieId);
     }
 
     @GetMapping("test")
