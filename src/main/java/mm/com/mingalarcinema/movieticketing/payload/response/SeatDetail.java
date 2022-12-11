@@ -11,7 +11,7 @@ public class SeatDetail {
     //enum?
     private String seatType;
 
-    private String seatPrice;
+    private Double seatPrice;
 
     private String seatStatus;
 }

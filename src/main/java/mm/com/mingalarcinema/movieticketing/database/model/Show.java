@@ -43,7 +43,11 @@ public class Show {
 
     private Integer totalTakenSeats;
 
-    private String unbookableSeats;
+    private String occupiedSeats;
+
+    private String walkInOnlySeats;
+
+    private String note;
 
     @JsonIgnore
     private Double totalIncome;
