@@ -117,6 +117,9 @@ public class ShowService implements IShowService {
 
         showDetail.setSeatDetail(seatDetails);
         showDetail.setSeatPlan(seatPlans);
+        showDetail.setShowId(showId);
+        showDetail.setShowDate(show.getShowDate());
+        showDetail.setShowTime(show.getShowTime());
 
         return ResponseFactory.onSuccessWithMessage(ResponseCode.SUCCESS, "Seat plan for the show " + showId, showDetail);
     }

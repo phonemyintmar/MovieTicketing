@@ -49,6 +49,8 @@ public class Show {
 
     private String note;
 
+    private String secretKey;
+
     @JsonIgnore
     private Double totalIncome;
 

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ShowRepo extends JpaRepository<Show, String> {
 
@@ -20,4 +21,7 @@ public interface ShowRepo extends JpaRepository<Show, String> {
             " and os.theatre_id = ot.theatre_id " +
             " order by ot.theatre_popularity desc", nativeQuery = true)
     List<ShowsResponse> getShowsByMovieId(String movieId);
+
+    @Query(value = "select screen_id from ob_show where show_id = :showId", nativeQuery = true)
+    Optional<String> getscreenId(String showId);
 }

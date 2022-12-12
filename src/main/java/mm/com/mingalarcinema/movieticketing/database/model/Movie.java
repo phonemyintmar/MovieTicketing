@@ -1,5 +1,6 @@
 package mm.com.mingalarcinema.movieticketing.database.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,4 +35,7 @@ public class Movie {
     private int moviePriority;
 
     private LocalDateTime updatedDate;
+
+    @JsonIgnore
+    private Double totalIncome;
 }

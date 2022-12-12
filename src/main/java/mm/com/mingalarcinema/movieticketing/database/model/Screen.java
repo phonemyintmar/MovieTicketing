@@ -17,6 +17,8 @@ public class Screen {
     @Id
     private String screenId;
 
+    private String screenName;
+
     private String theatreId;
 
     private String coupleSeats;
