@@ -17,6 +17,8 @@ public class Booking {
 
     private String showId;
 
+    private String showTime;
+
     private String seatNumbers;
 
     private String movieName;

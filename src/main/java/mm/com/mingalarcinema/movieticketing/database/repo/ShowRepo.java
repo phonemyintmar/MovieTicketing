@@ -24,4 +24,7 @@ public interface ShowRepo extends JpaRepository<Show, String> {
 
     @Query(value = "select screen_id from ob_show where show_id = :showId", nativeQuery = true)
     Optional<String> getscreenId(String showId);
+
+    @Query(value = "select show_key from ob_show where show_id = :showId", nativeQuery = true)
+    Optional<String> getShowKey(String showId);
 }

@@ -1,12 +1,9 @@
 package mm.com.mingalarcinema.movieticketing.database.repo;
 
 import mm.com.mingalarcinema.movieticketing.database.model.Screen;
-import mm.com.mingalarcinema.movieticketing.payload.response.ScreenAndThreatreName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.swing.text.html.Option;
-import java.util.List;
 import java.util.Optional;
 
 public interface ScreenRepo extends JpaRepository<Screen, String> {

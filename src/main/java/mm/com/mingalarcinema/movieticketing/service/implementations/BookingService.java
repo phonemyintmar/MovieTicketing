@@ -8,19 +8,21 @@ import mm.com.mingalarcinema.movieticketing.database.repo.BookingRepo;
 import mm.com.mingalarcinema.movieticketing.database.repo.ScreenRepo;
 import mm.com.mingalarcinema.movieticketing.database.repo.ShowRepo;
 import mm.com.mingalarcinema.movieticketing.payload.request.BookingRequest;
-import mm.com.mingalarcinema.movieticketing.payload.response.BaseResponse;
-import mm.com.mingalarcinema.movieticketing.payload.response.BookingResponse;
-import mm.com.mingalarcinema.movieticketing.payload.response.ResponseCode;
-import mm.com.mingalarcinema.movieticketing.payload.response.ResponseFactory;
+import mm.com.mingalarcinema.movieticketing.payload.response.*;
 import mm.com.mingalarcinema.movieticketing.service.IBookingService;
+import mm.com.mingalarcinema.movieticketing.util.EncryptionUtil;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -39,7 +41,7 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public ResponseEntity<BaseResponse> book(BookingRequest request) {
+    public ResponseEntity<BaseResponse> book(BookingRequest request) throws Exception {
         //booking over work flow ka pyan kyi ya mhr because payment br nyr ma htae ya thay loh
         //and payment a twet log file twy ll htote ya ml
 
@@ -84,16 +86,21 @@ public class BookingService implements IBookingService {
         bookingResponse.setBookedDate(LocalDateTime.now());
 
 
-        KeyGenerator keyGenerator = null;
-        try {
-            keyGenerator = KeyGenerator.getInstance("AES");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        keyGenerator.init(1);
-        SecretKey key = keyGenerator.generateKey();
-        key.
+        String algorithm = "AES/CBC/PKCS5Padding";
+        Optional<String> showKeyOptional = showRepo.getShowKey(request.getShowId());
+        if (!showKeyOptional.isPresent())
+            return ResponseFactory.onErrorWithMessage(ResponseCode.SOMETHING_WENT_WRONG, "cannot get show key");
 
+        String qrValue = "User name = " + booking.getUserName() + "\n" +
+                "Total cost = " + booking.getTotalCost() + "\n" +
+                "Booking status = " + booking.getBookingStatus() + "\n" +
+                "Theatre name = " + booking.getScreenAndTheatreName() + "\n" +
+                "Show time = " + booking.getShowTime();
+
+        String qrString = EncryptionUtil.encrypt(algorithm, qrValue, EncryptionUtil.getKeyFromPassword(showKeyOptional.get(), "JCGV128"), EncryptionUtil.generateIv());
+
+        String finalQrString = booking.getBookingId() + "|" + qrString;
+        bookingResponse.setQrString(finalQrString);
 
         return ResponseFactory.onSuccess(ResponseCode.SUCCESS, null);
     }

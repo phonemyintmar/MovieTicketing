@@ -49,7 +49,7 @@ public class Show {
 
     private String note;
 
-    private String secretKey;
+    private String showKey;
 
     @JsonIgnore
     private Double totalIncome;
