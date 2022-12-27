@@ -10,4 +10,6 @@ import java.security.spec.InvalidKeySpecException;
 public interface IBookingService {
 
     ResponseEntity<BaseResponse> book(BookingRequest request) throws Exception;
+
+    String test() throws Exception;
 }

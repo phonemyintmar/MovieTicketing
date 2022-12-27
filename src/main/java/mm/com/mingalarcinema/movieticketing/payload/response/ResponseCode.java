@@ -6,6 +6,7 @@ public enum ResponseCode {
 
     //error codes *starts with one
     INVALID_REQUEST("100", "Invalid Request"),
+    WRONG_CREDENTIALS("103", "Invalid Credentials"),
     SOMETHING_WENT_WRONG("199", "Something went wrong!");
 
     private final String code;

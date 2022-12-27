@@ -100,7 +100,7 @@ public class ShowService implements IShowService {
         }
 
 
-        seatDetails = seatDetails.stream().peek(seat -> {
+        seatDetails = seatDetails.stream().peek(seat -> {   
             if (Arrays.asList(show.getOccupiedSeats().split(",")).contains(seat.getSeatNo())) {
                 seat.setSeatStatus("Occupied");
             }

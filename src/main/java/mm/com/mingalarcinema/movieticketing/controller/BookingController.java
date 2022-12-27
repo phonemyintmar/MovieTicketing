@@ -18,7 +18,11 @@ public class BookingController {
     }
 
     @PostMapping("")
-    public ResponseEntity<BaseResponse> book(@RequestBody @Validated BookingRequest request) {
-       return bookingService.book(request);
+    public ResponseEntity<BaseResponse> book(@RequestBody @Validated BookingRequest request) throws Exception {
+        return bookingService.book(request);
+    }
+
+    public String test() throws Exception {
+        return bookingService.test();
     }
 }

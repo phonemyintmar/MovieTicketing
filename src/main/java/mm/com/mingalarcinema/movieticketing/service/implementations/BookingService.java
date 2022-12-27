@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
@@ -103,5 +105,19 @@ public class BookingService implements IBookingService {
         bookingResponse.setQrString(finalQrString);
 
         return ResponseFactory.onSuccess(ResponseCode.SUCCESS, null);
+    }
+
+    public static SecretKey convertStringToSecretKeyto(String encodedKey) {
+        byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
+        SecretKey originalKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+        return originalKey;
+    }
+
+    @Override
+    public String test() throws Exception {
+        String algorithm = "AES/CBC/PKCS5Padding";
+        String qrValue = "Hello World";
+        String qrString = EncryptionUtil.encrypt(algorithm, qrValue, convertStringToSecretKeyto("2b7e151628aed2a6abf71589"), EncryptionUtil.generateIv());
+        return qrString;
     }
 }
